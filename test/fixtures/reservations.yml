@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  film: one
+  email: MyString
+  document: MyString
+  phone: MyString
+  date: 2019-11-23
+  status: MyString
+
+two:
+  name: MyString
+  film: two
+  email: MyString
+  document: MyString
+  phone: MyString
+  date: 2019-11-23
+  status: MyString
