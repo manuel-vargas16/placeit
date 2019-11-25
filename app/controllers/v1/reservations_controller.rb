@@ -23,6 +23,31 @@ class V1::ReservationsController < ApplicationController
     render json: { reservations: reservations.collect(&:details), error: false }, status: :ok
   end
 
+   # Autor: Manuel Vargas
+  #
+  # Fecha creacion: 2019-11-23
+  #
+  # Autor actualizacion: 
+  #
+  # Fecha actualizacion: 
+  #
+  # Metodo: POST - Crear una reservación
+  #
+  # Parámetros: name, description, url_film, start_date, end_date
+  #
+  # URL: /v1/films.json
+  #
+  # Resultado: Crea una reservación
+  #
+  def create
+    reservation = Reservation.new(reservation_params)
+
+    if reservation.save
+      render json: { reservation: reservation, error: false }, status: :ok
+    else
+      render json: { errors: reservation.errors.full_messages.to_sentence, error: true }, status: :unprocessable_entity
+    end
+  end
 
   # Autor: Manuel Vargas
   #
@@ -43,6 +68,6 @@ class V1::ReservationsController < ApplicationController
   
   #PARÁMETROS FUERTES
   def reservation_params
-    params.require(:reservation).permit(:name, :email, :document, :phone, :date)
+    params.require(:reservation).permit(:name, :email, :document, :phone, :date, :film_id)
   end
 end

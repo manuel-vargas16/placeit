@@ -40,12 +40,10 @@ class V1::FilmsController < ApplicationController
   # Resultado: Crea una película
   #
   def create
-    film = Film.new(film_params)
-
-    if film.save
-      render json: { film: film.collect(&:details), error: false }, status: :ok
+    if film = Film.create(film_params)
+      render json: { film: film, error: false }, status: :ok
     else
-      render json: { film: film.errors.to_sentence, error: true }, status: :unprocessable_entity
+      render json: { errors: film.errors.full_messages.to_sentence, error: true }, status: :unprocessable_entity
     end
   end
 

@@ -3,6 +3,7 @@ class Reservation < ApplicationRecord
 
   belongs_to :film
   validates :name, :email, :document, :phone, :date, presence: true
+  validate :limit_reservations_by_film?
 
 
   aasm column: "status", skip_validation_on_save: true do
@@ -15,6 +16,11 @@ class Reservation < ApplicationRecord
     event :enable do
       transitions from: :inactive, to: :active
     end
+  end
+
+  def limit_reservations_by_film? 
+    count_reservation_film = Reservation.where(film_id: self.film_id, date: Date.today).count
+    errors.add(:message, "Ya estan ocupados todos los asientos para la película #{self.film.name} para el día #{self.date}") if count_reservation_film >= 10 
   end
 
   def self.by_dates(start_date, end_date)
