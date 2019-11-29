@@ -18,7 +18,7 @@ class V1::ReservationsController < ApplicationController
   # Resultado: Listado de reservas
   #
   def index
-    reservations =  @valid_dates ? Reservation.by_dates(params[:start_date], params[:end_date]) : Reservation.all
+    reservations =  @valid_dates ? Reservation.by_dates(params[:start_date].to_date, params[:end_date].to_date) : Reservation.actives
 
     render json: { reservations: reservations.collect(&:details), error: false }, status: :ok
   end

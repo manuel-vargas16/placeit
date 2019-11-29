@@ -18,7 +18,7 @@ class V1::FilmsController < ApplicationController
   # Resultado: Listado de películas completo 
   #
   def index
-    films =  @valid_dates ? Film.by_dates(params[:start_date], params[:end_date]) : Film.all
+    films =  @valid_dates ? Film.actives.by_dates(params[:start_date].to_date, params[:end_date].to_date) : Film.actives
 
     render json: { films: films.collect(&:details), error: false }, status: :ok
   end
