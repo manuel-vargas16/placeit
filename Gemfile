@@ -11,7 +11,7 @@ gem 'rails', '~> 5.1.6', '>= 5.1.6.2'
 # Gema que permite usar como base datos postgrest para Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 4.3'
 # Gema para de máquinas de estado
 gem 'aasm'
 
